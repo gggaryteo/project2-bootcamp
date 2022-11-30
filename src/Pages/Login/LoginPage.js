@@ -1,3 +1,5 @@
+import "./LoginPage.css"
+
 export default function Login() {
   return (
     <main style={{ padding: "1rem 0" }}>

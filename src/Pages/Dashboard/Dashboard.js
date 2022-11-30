@@ -1,3 +1,5 @@
+import "./Dashboard.css"
+
 export default function Dashboard() {
   return (
     <main style={{ padding: "1rem 0" }}>
