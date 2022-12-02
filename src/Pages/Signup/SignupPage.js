@@ -1,3 +1,5 @@
+import "./SignupPage.css"
+
 export default function Signup() {
   return (
     <main style={{ padding: "1rem 0" }}>
