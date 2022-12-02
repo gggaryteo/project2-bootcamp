@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import "./LoginPage.css";
 import { auth } from "../../firebase";
