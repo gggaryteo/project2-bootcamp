@@ -6,10 +6,12 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import TaskCard from "./Pages/TaskCard/TaskCard";
 import CreateProject from "./Pages/CreateProject/CreateProject";
 import Navbar from "./Components/Navbar";
+import Sidebar from "./Components/Sidebar";
 
 function App() {
   return (
     <div className="App">
+      <Sidebar/>
       <div className="container">
         <Navbar/>
         <Routes>
