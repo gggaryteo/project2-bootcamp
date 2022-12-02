@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./LoginPage.css";
 import { auth } from "../../firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {
   const [loginEmail, setLoginEmail] = useState("");
@@ -58,7 +59,9 @@ export default function LoginPage() {
         />
 
         <div>
-          <button className="button">Sign up</button>
+          <Link to="/signup">
+            <button className="button">Sign up</button>
+          </Link>
           <button className="button" onClick={login}>
             Login
           </button>
