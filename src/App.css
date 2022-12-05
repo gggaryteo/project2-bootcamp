@@ -1,6 +1,3 @@
-/* Give subsequent elements a flex property
-e.g Sidebar and Navbar is side-by-side
-*/
 .App {
   display: flex;
 }
