@@ -1,34 +1,19 @@
 import "./SignupPage.css";
 import React, { useState } from "react";
-import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useSignUp } from '../../hooks/useSignUp';
 import "./SignupPage.css";
-import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
-  const navigate = useNavigate();
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [displayPicture, setDisplayPicture] = useState(null);
   const [displayPictureError, setDisplayPictureError] = useState(null);
+  const { signup, error, isPending } = useSignUp()
 
   const Create = (event) => {
     event.preventDefault();
-
-    createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
-      .then((userCredential) => {
-        console.log("Successful registration");
-
-        navigate("/login");
-        // if successful, redirect back to login page
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("Error code: ", errorCode);
-        console.log("Error message: ", errorMessage);
-      });
+    signup(registerEmail, registerPassword, displayName, displayPicture)
   };
 
   const handleFileChange = (event) => {
@@ -60,13 +45,8 @@ export default function Signup() {
 
   }
 
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log(registerEmail, registerPassword, displayName, displayPicture)
-  // }
-
   return (
-      <form className="auth-form">
+      <form className="auth-form" onSubmit={Create}>
         <h2>Sign Up</h2>
         <label>
           <span>Enter E-mail: </span>
@@ -110,9 +90,9 @@ export default function Signup() {
           />
           {displayPictureError && <div className="error">{displayPictureError}</div>}
         </label>
-        <button className="btn" onClick={Create}>
-          Create Account
-        </button>
+        {!isPending && <button className="btn">Create Account</button>}
+        {isPending && <button className="btn" disabled>Loading</button>}
+        {error && <div className="error">{error}</div>}
       </form>
   );
 }
