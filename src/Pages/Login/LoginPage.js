@@ -67,11 +67,6 @@ export default function LoginPage() {
           </button>
         </div>
       </form>
-
-      {/* {To test if user is logged in or not} */}
-      <div className="testbox">
-        <h2>Current user logged in: {user.email} </h2>
-      </div>
     </div>
   );
 }
