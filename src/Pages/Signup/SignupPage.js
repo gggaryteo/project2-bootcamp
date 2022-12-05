@@ -11,13 +11,14 @@ export default function Signup() {
   const [registerPassword, setRegisterPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [displayPicture, setDisplayPicture] = useState(null);
+  const [displayPictureError, setDisplayPictureError] = useState(null);
 
   const Create = (event) => {
     event.preventDefault();
 
     createUserWithEmailAndPassword(auth, registerEmail, registerPassword)
       .then((userCredential) => {
-        console.log("Success registeration");
+        console.log("Successful registration");
 
         navigate("/login");
         // if successful, redirect back to login page
@@ -29,6 +30,40 @@ export default function Signup() {
         console.log("Error message: ", errorMessage);
       });
   };
+
+  const handleFileChange = (event) => {
+    setDisplayPicture(null);
+    let selectedImage = event.target.files[0]
+    console.log(selectedImage);
+
+    // Check if the image is selected or not. Do not want undefined if the person clicked 'Cancel'
+    if (!selectedImage) {
+      setDisplayPictureError('Please select a image file');
+      return
+    }
+
+    // Check if the image selected is of image type. If it's not, show error message.
+    if (!selectedImage.type.includes('image')) {
+      setDisplayPictureError('The selected file must be either JPG or PNG only.')
+      return
+    }
+    
+    // Limit the image upload size to 1 Mb
+    if(selectedImage.size > 1000000) {
+      setDisplayPictureError('Image file size must be less than 1MB')
+      return
+    }
+
+    setDisplayPictureError(null)
+    setDisplayPicture(selectedImage)
+    console.log('display picture updated', displayPicture)
+
+  }
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log(registerEmail, registerPassword, displayName, displayPicture)
+  // }
 
   return (
       <form className="auth-form">
@@ -71,7 +106,9 @@ export default function Signup() {
           <input
             required
             type="file"
+            onChange={handleFileChange}
           />
+          {displayPictureError && <div className="error">{displayPictureError}</div>}
         </label>
         <button className="btn" onClick={Create}>
           Create Account
