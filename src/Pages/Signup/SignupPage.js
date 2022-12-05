@@ -9,6 +9,8 @@ export default function Signup() {
   const navigate = useNavigate();
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [displayPicture, setDisplayPicture] = useState(null);
 
   const Create = (event) => {
     event.preventDefault();
@@ -29,33 +31,51 @@ export default function Signup() {
   };
 
   return (
-    <div className="signupBox">
-      <h2>Sign up Page</h2>
-
-      <form className="formbox">
-        <input
-          className="input"
-          type="text"
-          placeholder="email"
-          onChange={(event) => {
-            setRegisterEmail(event.target.value);
-          }}
-        />
-        <br />
-        <input
-          className="input"
-          type="text"
-          placeholder="password"
-          onChange={(event) => {
-            setRegisterPassword(event.target.value);
-          }}
-        />
-
-        <br />
-        <button className="button" onClick={Create}>
-          Create
+      <form className="auth-form">
+        <h2>Sign Up</h2>
+        <label>
+          <span>Enter E-mail: </span>
+          <input
+            required
+            type="email"
+            onChange={(event) => {
+              setRegisterEmail(event.target.value);
+            }}
+            value={registerEmail}
+          />
+        </label>
+        <label>
+          <span>Enter Password: </span>
+          <input
+            required
+            type="password"
+            onChange={(event) => {
+              setRegisterPassword(event.target.value);
+            }}
+            value={registerPassword}
+          />
+        </label>
+        <label>
+          <span>Display Name: </span>
+          <input
+            required
+            type="text"
+            onChange={(event) => {
+              setDisplayName(event.target.value);
+            }}
+            value={displayName}
+          />
+        </label>
+        <label>
+          <span>Profile Picture: </span>
+          <input
+            required
+            type="file"
+          />
+        </label>
+        <button className="btn" onClick={Create}>
+          Create Account
         </button>
       </form>
-    </div>
   );
 }
