@@ -17,8 +17,8 @@ export default function Signup() {
       .then((userCredential) => {
         console.log("Success registeration");
 
-        // if successful, redirect back to login page
         navigate("/login");
+        // if successful, redirect back to login page
       })
       .catch((error) => {
         const errorCode = error.code;
