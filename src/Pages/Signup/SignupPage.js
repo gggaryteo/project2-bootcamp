@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { auth } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import "./SignupPage.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
+  const navigate = useNavigate();
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -17,6 +19,7 @@ export default function Signup() {
       .then((userCredential) => {
         console.log("Success registeration");
 
+        navigate("/login");
         // if successful, redirect back to login page
       })
       .catch((error) => {
