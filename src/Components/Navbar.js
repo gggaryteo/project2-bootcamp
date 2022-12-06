@@ -40,13 +40,14 @@ export default function Navbar() {
       }
     }
     catch(error) {
-      setError(error.message);
-      setIsLoading(false);
+      if (!isCancelled) {
+        setError(error.message);
+        setIsLoading(false);
+      }
     }
   }
 
   useEffect(() => {
-    setIsCancelled(false);
     return () => setIsCancelled(true);
   }, []);
 

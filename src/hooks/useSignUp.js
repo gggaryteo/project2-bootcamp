@@ -3,18 +3,19 @@ import { auth, storage, db } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useAuthContext } from "./useAuthContext";
-import { collection, setDoc, doc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 export const useSignUp = () => {
   const [error, setError] = useState(null);
-  const [isPending, setIsPending] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isCancelled, setIsCancelled] = useState(false);
   const { dispatch } = useAuthContext();
 
   const signup = async (registerEmail, registerPassword, displayName, displayPicture) => {
     // Set error to null whenever a user signs up
     setError(null);
-    // When a request is made, isPending == true
-    setIsPending(true);
+    // When a request is made, isLoading == true
+    setIsLoading(true);
 
     try {
       // Create the user
@@ -36,8 +37,12 @@ export const useSignUp = () => {
 
       // Update the user profile
       await updateProfile(user, { displayName, photoURL });
-      setIsPending(false);
-      setError(null);
+
+      if (!isCancelled) {
+        //update states
+        setIsLoading(false);
+        setError(null);
+      }
 
       // Create and store user Document in Firestore Database
       const usersCollectionRef = doc(db, 'users', user.uid)
@@ -51,16 +56,18 @@ export const useSignUp = () => {
       dispatch({ type: "LOGIN", payload: auth.currentUser });
 
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        setError("The email address is already in use");
-      } else {
-        setError(error.message)
-      }
-      setIsPending(false);
+      if (!isCancelled){
+        if (error.code === "auth/email-already-in-use") {
+          setError("The email address is already in use");
+        } else {
+          setError(error.message);
+        }
+        setIsLoading(false);
+      }  
     }
     // Navigate to login page
     // await navigate("/login");
   };
 
-  return { signup, error, isPending };
+  return { signup, error, isLoading };
 };

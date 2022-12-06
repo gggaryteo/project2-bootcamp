@@ -9,7 +9,7 @@ export default function Signup() {
   const [displayName, setDisplayName] = useState("");
   const [displayPicture, setDisplayPicture] = useState(null);
   const [displayPictureError, setDisplayPictureError] = useState(null);
-  const { signup, error, isPending } = useSignUp()
+  const { signup, error, isLoading } = useSignUp()
 
   const Create = (event) => {
     event.preventDefault();
@@ -90,8 +90,8 @@ export default function Signup() {
           />
           {displayPictureError && <div className="error">{displayPictureError}</div>}
         </label>
-        {!isPending && <button className="btn">Create Account</button>}
-        {isPending && <button className="btn" disabled>Loading</button>}
+        {!isLoading && <button className="btn">Create Account</button>}
+        {isLoading && <button className="btn" disabled>Loading</button>}
         {error && <div className="error">{error}</div>}
       </form>
   );
