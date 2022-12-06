@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { auth, storage } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useAuthContext } from "./useAuthContext";
 
 export const useSignUp = () => {
-  const [isCancelled, setIsCancelled] = useState(false);
   const [error, setError] = useState(null);
   const [isPending, setIsPending] = useState(false);
-  const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
 
   const signup = async (registerEmail, registerPassword, displayName, displayPicture) => {
     // Set error to null whenever a user signs up
@@ -38,8 +37,9 @@ export const useSignUp = () => {
       setIsPending(false);
       setError(null);
 
-      // Dispatch login action
-      // dispatch({ type: "LOGIN", payload: auth.currentUser });
+      // Dispatch Action (useAuthContext)
+      dispatch({ type: "LOGIN", payload: auth.currentUser });
+
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         setError("The email address is already in use");
@@ -51,10 +51,6 @@ export const useSignUp = () => {
     // Navigate to login page
     // await navigate("/login");
   };
-
-  useEffect(() => {
-    return () => setIsCancelled(true);
-  }, []);
 
   return { signup, error, isPending };
 };
