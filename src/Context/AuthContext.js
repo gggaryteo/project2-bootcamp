@@ -7,7 +7,11 @@ export const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
       // spread the properties of the state, and override the user property with action.payload
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload }
+      
+    case "LOGOUT":
+      return {...state, user: null}
+
     default:
       return state;
   }
