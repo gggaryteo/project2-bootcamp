@@ -32,6 +32,7 @@ export default function Navbar() {
       await signOut(auth);
       // dispatch logout action
       dispatch({type: 'LOGOUT'})
+      setIsLoading(false);
 
       if (!isCancelled) {
         //update states
@@ -52,18 +53,32 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div className='navbar'>
+    <div className="navbar">
       <ul>
-        <li className='logo'>
-          <img src={ProjectLogo} alt="project-logo"/>
+        <li className="logo">
+          <img src={ProjectLogo} alt="project-logo" />
           <span>Dr. Project</span>
         </li>
-        <li><Link to="/login">Login</Link></li>
-        <li><Link to="/signup">Signup</Link></li>
-        {!isLoading && <button className='btn' onClick={handleLogout}>Logout</button>}
-        {isLoading && <button className='btn' onClick={handleLogout} disabled>Logging Out</button>}
+
+        {!user && (
+          <>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Signup</Link>
+            </li>
+          </>
+        )}
+
+        {user && (
+          <>
+            {!isLoading && (<button className="btn" onClick={handleLogout}>Logout</button>)}
+            {isLoading && (<button className="btn" onClick={handleLogout} disabled>Logging Out</button>)}
+          </>
+        )}
       </ul>
     </div>
-  )
+  );
 }
  
