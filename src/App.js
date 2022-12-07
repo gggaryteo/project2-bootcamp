@@ -8,6 +8,7 @@ import CreateProject from "./Pages/CreateProject/CreateProject";
 import Navbar from "./Components/Navbar";
 import Sidebar from "./Components/Sidebar";
 import { useAuthContext } from "./hooks/useAuthContext";
+import UserList from "./Components/UserList";
 
 function App() {
   const { user, authIsReady } = useAuthContext();
@@ -27,6 +28,7 @@ function App() {
               <Route path="/create-project" element={user ? <CreateProject /> : <Navigate to="/login"/>} />
             </Routes>
           </div>
+          {user && <UserList/>}
         </>
       )}
     </div>

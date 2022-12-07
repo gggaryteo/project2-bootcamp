@@ -9,10 +9,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 
 export default function Sidebar() {
-
-   const { user } = useAuthContext();
-   console.log(user);
-
+  const { user } = useAuthContext();
   return (
     <div className="sidebar">
       <div className="sidebar-content">
@@ -28,7 +25,6 @@ export default function Sidebar() {
                 <span>Dashboard</span>
               </NavLink>
             </li>
-
             <li>
               <NavLink to="/create-project">
                 <img src={AddIcon} alt="add-icon" />
