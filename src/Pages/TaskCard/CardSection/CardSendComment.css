@@ -1,0 +1,30 @@
+.input-container {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-container h4 {
+  align-self: flex-start;
+}
+
+.input-container textarea {
+  width: 95%;
+  overflow: hidden;
+  outline: auto;
+  min-height: 80px;
+  resize: none;
+  align-self: center;
+}
+
+.input-container button {
+  height: 25px;
+  width: 50px;
+  border-radius: 5px;
+  color: white;
+  background-color: #1d9bf0;
+  margin: 10px 16px 10px 10px;
+  align-self: flex-end;
+  padding-right: 6px;
+}

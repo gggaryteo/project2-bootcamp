@@ -1,0 +1,20 @@
+.category-container {
+  border: 2px transparent #233;
+  display: flex;
+  align-items: center;
+}
+
+.category-container h4 {
+  display: flex;
+  padding: 5px 5px 5px 0px;
+  height: 30px;
+  align-items: center;
+}
+
+.category-container .dropdown {
+  width: auto;
+  height: 40px;
+  margin-right: 5px;
+  padding: 5px 5px 5px 0px;
+  outline: none;
+}

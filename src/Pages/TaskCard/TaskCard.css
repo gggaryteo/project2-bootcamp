@@ -1,0 +1,5 @@
+.task-card {
+  width: 80%;
+  min-height: fit-content;
+  border: 1px solid black;
+}
