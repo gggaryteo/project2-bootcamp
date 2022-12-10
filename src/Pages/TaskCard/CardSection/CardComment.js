@@ -9,51 +9,60 @@ import {
   updateDoc,
   arrayUnion,
   onSnapshot,
-  collection,
   addSnapShotListener,
-  getDocs,
+  querySnapshot,
+  getDoc,
 } from "firebase/firestore";
 import { async } from "@firebase/util";
 
 export default function CardComment(id) {
   const [comment, setComment] = useState("");
   const [pastcomments, setPastComments] = useState([]);
+  const documentid = id.projectid;
 
-  const testname = [
-    { user: "David", message: "Hello 1" },
-    { user: "Snorlax", message: "Hello 2" },
-    { user: "Squirtle", message: "Hello 3" },
-  ];
   // How to get username data
   const username = "Snorlax";
 
-  const documentid = id.projectid;
-  // "project1"
-
+  // Fetch project comments upon mounting
   useEffect(() => {
-    realTimeUpdates()
-  });
+    const fetchCommentData = async () => {
+      // Change "test-project" to "projects" later
+      const document = doc(db, "test-project", "project1");
+      const documentSnap = await getDoc(document);
+
+      if (documentSnap.exists()) {
+        const projectcomments = documentSnap.data().Comments;
+        // console.log("Document data ", projectcomments);
+        return projectcomments;
+      } else {
+        console.log("no such document");
+      }
+    };
+
+    fetchCommentData()
+      .then((value) => setPastComments(value))
+      .catch(console.error);
+  }, []);
 
   const handleSendComment = async (id) => {
-    // send data to firestore
-    // get username
-    // get timestamp
-    // get comment
-    // store data in an array of objects
-
     const commentData = {
       message: comment,
+      // How to retrieve username
       user: username,
       date: new Date().toDateString(),
     };
 
     const docref = doc(db, "test-project", documentid);
 
-    await updateDoc(docref, {
-      Comments: arrayUnion(commentData),
-    });
+    await updateDoc(
+      docref,
+      {
+        Comments: arrayUnion(commentData),
+      },
+      setComment("")
+    );
 
-    const unsub = onSnapshot(
+    onSnapshot(
       doc(db, "test-project", "project1"),
       { includeMetadataChanges: true },
       (doc) => {
@@ -63,15 +72,6 @@ export default function CardComment(id) {
     );
   };
 
-  const realTimeUpdates =  () => {
-    const querySnapshot = getDocs(collection(db, "test-projects"));
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      console.log("Did it triggered?");
-      console.log(doc.id, " => ", doc.data());
-    });
-  };
-
   return (
     <div>
       <div>
@@ -79,8 +79,9 @@ export default function CardComment(id) {
         <div>
           {pastcomments.map((msg) => (
             <div>
-              <h5>{msg.user}</h5>
-              <h5>{msg.message}</h5>
+              <p>{msg.user}</p>
+              <p>{msg.message}</p>
+              <p>{msg.date}</p>
             </div>
           ))}
         </div>
@@ -88,8 +89,10 @@ export default function CardComment(id) {
 
       <div className="input-container">
         <h4>Comment</h4>
-        <textarea onChange={(event) => setComment(event.target.value)} />
-
+        <textarea
+          onChange={(event) => setComment(event.target.value)}
+          value={comment}
+        />
         <button className="button" onClick={handleSendComment}>
           Send
         </button>

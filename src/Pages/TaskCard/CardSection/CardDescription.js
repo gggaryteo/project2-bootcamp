@@ -11,19 +11,6 @@ export default function CardDescription() {
   const [textformat, setTextFormat] = useState("textformat");
   const [editDescription, setEditDescription] = useState(false);
 
-  /// Fetch data ///
-
-  /// Text format listener ///
-  // const formatBold = () => {
-  //   document.execCommand("bold", false, null);
-  // };
-  // const formatItalic = () => {
-  //   document.execCommand("italic", false, null);
-  // };
-  // const formatUnderline = () => {
-  //   document.execCommand("underline", false, null);
-  // };
-
   const handleClickAway = () => {
     setEditDescription(false);
 
@@ -38,25 +25,6 @@ export default function CardDescription() {
     <div className="description-container">
       <h4>Project Details</h4>
       <div className="content-box">
-        {/* <div className={textformat}>
-          <button id="bold" className="text-format-button" onClick={formatBold}>
-            <i>B</i>
-          </button>
-          <button
-            id="italic"
-            className="text-format-button"
-            onClick={formatItalic}
-          >
-            <i>I</i>
-          </button>
-          <button
-            id="bold"
-            className="text-format-button"
-            onClick={formatUnderline}
-          >
-            <i>U</i>
-          </button>
-        </div> */}
         <ClickAwayListener onClickAway={handleClickAway}>
           {editDescription ? (
             <textarea
