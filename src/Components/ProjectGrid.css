@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap');
+
+.p-title{
+  font-family: "Luckiest Guy", Roboto;
+  font-size: 25px;
+  margin-bottom: 10px;
+  color: black;
+
+}
+
+.due-date {
+  font-size: 15px;
+  color: rgb(65,65,65)
+}
+
 .assigned-users {
   margin-top: 20px;
   padding-top: 10px;
