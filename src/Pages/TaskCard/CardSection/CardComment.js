@@ -31,14 +31,7 @@ export default function CardComment(id) {
   // "project1"
 
   useEffect(() => {
-    async function realTimeUpdates() {
-      const querySnapshot = await getDocs(collection(db, "test-projects"));
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log("Did it triggered?");
-        console.log(doc.id, " => ", doc.data());
-      });
-    }
+    realTimeUpdates()
   });
 
   const handleSendComment = async (id) => {
@@ -70,8 +63,8 @@ export default function CardComment(id) {
     );
   };
 
-  const realTimeUpdates = async () => {
-    const querySnapshot = await getDocs(collection(db, "test-projects"));
+  const realTimeUpdates =  () => {
+    const querySnapshot = getDocs(collection(db, "test-projects"));
     querySnapshot.forEach((doc) => {
       // doc.data() is never undefined for query doc snapshots
       console.log("Did it triggered?");

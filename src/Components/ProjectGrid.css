@@ -1,0 +1,10 @@
+.assigned-users {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.assigned-users .avatar {
+  width: 40px;
+  height: 40px;
+}
