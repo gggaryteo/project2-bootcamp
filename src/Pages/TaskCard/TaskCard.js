@@ -7,8 +7,7 @@ import { Card, ClickAwayListener } from "@mui/material";
 import CardHeader from "./CardSection/CardHeader";
 import CardCategory from "./CardSection/CardCategory";
 import CardDescription from "./CardSection/CardDescription";
-import CardComment from "./CardSection/CardComments";
-import CardSendComment from "./CardSection/CardSendComment";
+import CardComment from "./CardSection/CardComment";
 
 // import Button from "@mui/material/Button";
 
@@ -19,18 +18,18 @@ export default function TaskCard() {
   // Category
   // Assigned user
 
+  const [projectid, setProjectid] = useState("project1");
+
   return (
     <main style={{ padding: "1rem 0" }}>
       <div className="task-card">
-        <CardHeader />
+        <CardHeader projectid={projectid} />
 
         <CardCategory />
 
         <CardDescription />
 
-        <CardComment />
-
-        <CardSendComment />
+        <CardComment projectid={projectid} />
       </div>
     </main>
   );

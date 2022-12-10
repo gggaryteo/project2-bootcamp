@@ -8,6 +8,8 @@ export default function CardHeader() {
 
   const handleClickAway = () => {
     seteditTitle(false);
+
+    // UPDATE ONCHANGE INPUT
   };
 
   const handleClickTitle = () => {
@@ -16,7 +18,7 @@ export default function CardHeader() {
 
   return (
     <div>
-      <h4>Title</h4>
+      <h4>Project Name</h4>
 
       <ClickAwayListener onClickAway={handleClickAway}>
         <div>

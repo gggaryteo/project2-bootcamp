@@ -4,8 +4,9 @@ import { ClickAwayListener } from "@mui/material";
 import { fontWeight } from "@mui/system";
 
 export default function CardDescription() {
-  const [projectDescript, setProjectDescript] = useState("<b>Hello<b>");
-  // "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+  const [projectDescript, setProjectDescript] = useState(
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  );
 
   const [textformat, setTextFormat] = useState("textformat");
   const [editDescription, setEditDescription] = useState(false);
@@ -35,7 +36,7 @@ export default function CardDescription() {
 
   return (
     <div className="description-container">
-      <h4>Description</h4>
+      <h4>Project Details</h4>
       <div className="content-box">
         {/* <div className={textformat}>
           <button id="bold" className="text-format-button" onClick={formatBold}>
