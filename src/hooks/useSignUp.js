@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { auth, storage, db } from "../firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -68,6 +68,10 @@ export const useSignUp = () => {
     // Navigate to login page
     // await navigate("/login");
   };
+
+  useEffect(() => {
+    return () => setIsCancelled(true);
+  }, []);
 
   return { signup, error, isLoading };
 };
