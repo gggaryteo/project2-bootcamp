@@ -38,7 +38,7 @@ export default function CardComment(id) {
       )
       .catch(console.error);
     return () => {};
-  }, []);
+  }, [projectid]);
 
   const handleSendComment = async () => {
     const commentData = {
