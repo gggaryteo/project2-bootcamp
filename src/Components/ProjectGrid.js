@@ -13,9 +13,9 @@ export default function ProjectGrid({ projects }) {
         <p> There aren't any projects yet! Create one now~ </p>
       )}
 
-      <Grid container spacing={5} direction="row" marginTop="10px">
+      <Grid container spacing={5} flexGrow="1" direction="row" marginTop="10px">
         {projects.map((taskcard) => (
-          <Grid item md={4} key={taskcard.id}>
+          <Grid item md={4} xs={12} sm={6} key={taskcard.id}>
             <Card
               sx={{
                 borderStyle: "solid",
@@ -24,7 +24,7 @@ export default function ProjectGrid({ projects }) {
                 transition: "transform 0.15s ease-in-out",
                 "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
               }}
-              style={{ height: "100%" }}
+              style={{ height: "100%", width: "100%" }}
             >
               <CardContent>
                 <Link
