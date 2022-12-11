@@ -1,7 +1,7 @@
 // Styles
 import './UserList.css'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect} from 'react'
 import { db } from '../firebase'
 import { collection, onSnapshot } from 'firebase/firestore';
 import { useAuthContext } from '../hooks/useAuthContext';

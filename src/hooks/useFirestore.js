@@ -1,5 +1,5 @@
 import { useReducer, useEffect, useState } from "react";
-import { addDoc, collection, Timestamp} from "firebase/firestore";
+import { doc, addDoc, deleteDoc, collection, Timestamp} from "firebase/firestore";
 import { db } from "../firebase";
 
 // When we make a request to add a new document, when firestore sends back the response, the document will be updated.
@@ -65,7 +65,15 @@ export const useFirestore = (projectCollection) => {
 
   // Delete a document
   const deleteDocument = async (id) => {
+    dispatch({ type: 'IS_PENDING' })
 
+    try {
+      await deleteDoc(doc(projectsRef, id))
+    } 
+    
+    catch(error){
+      dispatchIfNotCancelled({ type: 'ERROR', payload: 'Could not delete project. Please try again.'})
+    }
   }
 
   useEffect(() => {

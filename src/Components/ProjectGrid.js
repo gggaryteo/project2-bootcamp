@@ -20,12 +20,15 @@ export default function ProjectGrid({ projects }) {
               sx={{
                 borderStyle: "solid",
                 margin: "5px",
+                borderWidth: "2px",
+                transition: "transform 0.15s ease-in-out",
+                  "&:hover": { transform: "scale3d(1.05, 1.05, 1)" },
               }}
             >
               <CardContent>
-                <Link to={`/taskcards/${taskcard.id}`}>
-                  <h4>{taskcard.projectName}</h4>
-                  <p>Due by {taskcard.dueDate.toDate().toLocaleDateString()}</p>
+                <Link style={{ textDecoration: 'none' }} to={`/taskcards/${taskcard.id}`}>
+                  <p className="p-title">{taskcard.projectName}</p>
+                  <p className="due-date">Due by {taskcard.dueDate.toDate().toLocaleDateString()}</p>
                   <div className="assigned-users">
                     {taskcard.storeAssignedUsers.map((user) => (
                       <UserAvatar key={user.photoURL} src={user.photoURL} />

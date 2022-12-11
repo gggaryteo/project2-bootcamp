@@ -1,6 +1,6 @@
 // styles and images
 import './Navbar.css';
-import ProjectLogo from '../assets/ProjectLogo.svg';
+import ProjectLogo from '../assets/PokeProject.png';
 
 import { Link } from "react-router-dom";
 
@@ -57,7 +57,6 @@ export default function Navbar() {
       <ul>
         <li className="logo">
           <img src={ProjectLogo} alt="project-logo" />
-          <span>Dr. Project</span>
         </li>
 
         {!user && (

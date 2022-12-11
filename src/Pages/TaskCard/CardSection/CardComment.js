@@ -37,6 +37,7 @@ export default function CardComment(id) {
           : setPastComments(value)
       )
       .catch(console.error);
+    return () => {};
   }, []);
 
   const handleSendComment = async () => {
@@ -44,6 +45,7 @@ export default function CardComment(id) {
       message: comment,
       user: username,
       date: new Date().toDateString(),
+      id: Math.random(),
     };
 
     const docref = doc(db, "projects", projectid);
@@ -74,7 +76,7 @@ export default function CardComment(id) {
           {pastcomments === []
             ? console.log("Empty")
             : pastcomments.map((msg) => (
-                <div>
+                <div key={msg.id}>
                   <p>{msg.user}</p>
                   <p>{msg.message}</p>
                   <p>{msg.date}</p>
