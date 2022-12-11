@@ -1,0 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap");
+
+.project-taskData .title,
+.project-taskData .date,
+.project-taskData .details,
+.project-taskData h4,
+.project-taskData .created-by {
+  font-family: "Luckiest Guy", Roboto;
+  font-weight: 500;
+}
+
+.project-taskData .title {
+  text-align: center;
+}
+
+.project-taskData .created-by {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.project-taskData .date {
+  margin: 10px 0;
+  font-size: 0.9em;
+  color: rgb(65, 65, 65);
+}
+.project-taskData .details {
+  margin: 25px 0;
+  color: rgb(0, 0, 0);
+  line-height: 1.8em;
+  font-size: 0.9em;
+  margin-bottom: 25px;
+}
+.project-taskData h4 {
+  color: rgb(65, 65, 65);
+  font-size: 0.9em;
+}
+.project-taskData .users {
+  display: flex;
+  margin-top: 10px;
+}
+.project-taskData .users .avatar {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px;
+}
+.project-taskData + .btn {
+  margin-top: 20px;
+}
+
+/* project comments */
+.project-comments label {
+  margin-bottom: 0px;
+}
+.project-comments textarea {
+  min-height: 40px;
+  font-size: 1.5em;
+}
