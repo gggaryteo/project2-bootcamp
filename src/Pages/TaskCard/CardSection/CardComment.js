@@ -42,7 +42,9 @@ export default function CardComment(id) {
     return () => {};
   }, [projectid]);
 
-  const handleSendComment = async () => {
+  const handleSendComment = async (e) => {
+    e.preventDefault();
+
     const commentData = {
       message: comment,
       user: username,
@@ -65,7 +67,6 @@ export default function CardComment(id) {
       doc(db, "projects", projectid),
       { includeMetadataChanges: true },
       (doc) => {
-        console.log(doc.data());
         setPastComments(doc.data().comments);
       }
     );
@@ -95,16 +96,17 @@ export default function CardComment(id) {
             ))}
       </ul>
 
-      <div className="input-container">
+      <form className="input-container" onSubmit={handleSendComment}>
         <h4>Comment</h4>
         <textarea
           onChange={(event) => setComment(event.target.value)}
           value={comment}
-        />
-        <button className="button" onClick={handleSendComment}>
+          required
+        ></textarea>
+        <button className="button">
           Send
         </button>
-      </div>
+      </form>
     </>
   );
 }
