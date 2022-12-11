@@ -17,7 +17,6 @@ export default function CardDescription(id) {
 
       if (documentSnap.exists()) {
         const projectDetails = documentSnap.data().projectDetails;
-        console.log("Document data ", projectDetails);
         return projectDetails;
       } else {
         console.log("no such document");

@@ -13,7 +13,7 @@ import CardComment from "./CardSection/CardComment";
 
 // import Button from "@mui/material/Button";
 
-export default function TaskCard() {
+export default function TaskCard(user) {
   let projectid = useParams().id;
 
   return (

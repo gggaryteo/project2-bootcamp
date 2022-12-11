@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CardComment.css";
 
-import { db } from "../../../firebase";
+import { db, auth } from "../../../firebase";
 import {
   doc,
   updateDoc,
@@ -14,9 +14,7 @@ export default function CardComment(id) {
   const [comment, setComment] = useState("");
   const [pastcomments, setPastComments] = useState([]);
   const projectid = id.projectid;
-
-  // How to get username data
-  const username = "Snorlax";
+  const username = auth.currentUser.displayName;
 
   // Fetch project comments upon mounting
   useEffect(() => {
@@ -26,7 +24,6 @@ export default function CardComment(id) {
 
       if (documentSnap.exists()) {
         const projectcomments = documentSnap.data().comments;
-        console.log("Document data ", projectcomments);
         return projectcomments;
       } else {
         console.log("no such document");
@@ -45,7 +42,6 @@ export default function CardComment(id) {
   const handleSendComment = async () => {
     const commentData = {
       message: comment,
-      // How to retrieve username
       user: username,
       date: new Date().toDateString(),
     };

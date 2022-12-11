@@ -19,7 +19,6 @@ export default function CardHeader(id) {
 
       if (documentSnap.exists()) {
         const projectName = documentSnap.data().projectName;
-        console.log("Document data ", projectName);
         return projectName;
       } else {
         console.log("no such document");

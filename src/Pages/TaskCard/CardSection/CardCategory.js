@@ -18,7 +18,6 @@ export default function SelectLabels(id) {
 
       if (documentSnap.exists()) {
         const projectCategory = documentSnap.data().projectCategory;
-        console.log("Document data ", projectCategory);
         return projectCategory;
       } else {
         console.log("no such document");
