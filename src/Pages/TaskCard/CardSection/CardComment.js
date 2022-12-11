@@ -42,7 +42,7 @@ export default function CardComment(id) {
       .catch(console.error);
   }, []);
 
-  const handleSendComment = async (id) => {
+  const handleSendComment = async () => {
     const commentData = {
       message: comment,
       // How to retrieve username

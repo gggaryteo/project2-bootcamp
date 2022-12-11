@@ -1,18 +1,45 @@
 import React, { useState, useEffect } from "react";
 import "./CardDescription.css";
 import { ClickAwayListener } from "@mui/material";
-import { fontWeight } from "@mui/system";
+import { db } from "../../../firebase";
+import { doc, updateDoc, getDoc } from "firebase/firestore";
 
-export default function CardDescription() {
-  const [projectDescript, setProjectDescript] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  );
-
-  const [textformat, setTextFormat] = useState("textformat");
+export default function CardDescription(id) {
+  const [projectDescript, setProjectDescript] = useState("");
+  const projectid = id.projectid;
   const [editDescription, setEditDescription] = useState(false);
 
-  const handleClickAway = () => {
+  // Fetch project description upon mounting
+  useEffect(() => {
+    const fetchCommentData = async () => {
+      const document = doc(db, "projects", projectid);
+      const documentSnap = await getDoc(document);
+
+      if (documentSnap.exists()) {
+        const projectDetails = documentSnap.data().projectDetails;
+        console.log("Document data ", projectDetails);
+        return projectDetails;
+      } else {
+        console.log("no such document");
+      }
+    };
+
+    fetchCommentData()
+      .then((value) =>
+        typeof value == "undefined"
+          ? setProjectDescript("")
+          : setProjectDescript(value)
+      )
+      .catch(console.error);
+  }, []);
+
+  const handleClickAway = async () => {
     setEditDescription(false);
+    const docref = doc(db, "projects", projectid);
+
+    await updateDoc(docref, {
+      projectDetails: projectDescript,
+    });
 
     // UPDATE DOCS ON CHANGE DESCRIPTION TO FIREBASE
   };
