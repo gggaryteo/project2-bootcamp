@@ -4,21 +4,16 @@ import "./CardComment.css";
 import { db } from "../../../firebase";
 import {
   doc,
-  setDoc,
-  Timestamp,
   updateDoc,
   arrayUnion,
   onSnapshot,
-  addSnapShotListener,
-  querySnapshot,
   getDoc,
 } from "firebase/firestore";
-import { async } from "@firebase/util";
 
 export default function CardComment(id) {
   const [comment, setComment] = useState("");
   const [pastcomments, setPastComments] = useState([]);
-  const documentid = id.projectid;
+  const projectid = id.projectid;
 
   // How to get username data
   const username = "Snorlax";
@@ -26,13 +21,12 @@ export default function CardComment(id) {
   // Fetch project comments upon mounting
   useEffect(() => {
     const fetchCommentData = async () => {
-      // Change "test-project" to "projects" later
-      const document = doc(db, "test-project", "project1");
+      const document = doc(db, "projects", projectid);
       const documentSnap = await getDoc(document);
 
       if (documentSnap.exists()) {
-        const projectcomments = documentSnap.data().Comments;
-        // console.log("Document data ", projectcomments);
+        const projectcomments = documentSnap.data().comments;
+        console.log("Document data ", projectcomments);
         return projectcomments;
       } else {
         console.log("no such document");
@@ -40,7 +34,11 @@ export default function CardComment(id) {
     };
 
     fetchCommentData()
-      .then((value) => setPastComments(value))
+      .then((value) =>
+        typeof value == "undefined"
+          ? setPastComments([])
+          : setPastComments(value)
+      )
       .catch(console.error);
   }, []);
 
@@ -52,22 +50,22 @@ export default function CardComment(id) {
       date: new Date().toDateString(),
     };
 
-    const docref = doc(db, "test-project", documentid);
+    const docref = doc(db, "projects", projectid);
 
     await updateDoc(
       docref,
       {
-        Comments: arrayUnion(commentData),
+        comments: arrayUnion(commentData),
       },
       setComment("")
     );
 
     onSnapshot(
-      doc(db, "test-project", "project1"),
+      doc(db, "projects", projectid),
       { includeMetadataChanges: true },
       (doc) => {
         console.log(doc.data());
-        setPastComments(doc.data().Comments);
+        setPastComments(doc.data().comments);
       }
     );
   };
@@ -77,13 +75,15 @@ export default function CardComment(id) {
       <div>
         <h4>Past comments</h4>
         <div>
-          {pastcomments.map((msg) => (
-            <div>
-              <p>{msg.user}</p>
-              <p>{msg.message}</p>
-              <p>{msg.date}</p>
-            </div>
-          ))}
+          {pastcomments === []
+            ? console.log("Empty")
+            : pastcomments.map((msg) => (
+                <div>
+                  <p>{msg.user}</p>
+                  <p>{msg.message}</p>
+                  <p>{msg.date}</p>
+                </div>
+              ))}
         </div>
       </div>
 
