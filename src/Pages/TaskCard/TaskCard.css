@@ -1,8 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap");
 
-.project-taskData .title, .project-taskData .date, .project-taskData .details, .project-taskData h4, .project-taskData .created-by {
+.project-taskData .title,
+.project-taskData .date,
+.project-taskData .details,
+.project-taskData h4,
+.project-taskData .created-by {
   font-family: "Luckiest Guy", Roboto;
-  font-weight: 500
+  font-weight: 500;
 }
 
 .project-taskData .title {
@@ -13,7 +17,6 @@
   text-align: center;
   margin-bottom: 30px;
 }
-
 
 .project-taskData .date {
   margin: 10px 0;
