@@ -1,7 +1,7 @@
 import React from 'react'
 import './Dashboard.css'
 
-const INITIAL_ARRAY = ['All', 'Mine', 'Programming', 'DevOps', 'Marketing', 'Pokemon Only']
+const INITIAL_ARRAY = ['All', 'Mine', 'Programming', 'DevOps', 'Marketing', 'Pokemon']
 
 export default function Filter({ currentFilter, changeFilter }) {
 
