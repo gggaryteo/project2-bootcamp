@@ -36,7 +36,7 @@ export default function Dashboard() {
       case 'Programming':
       case 'DevOps':
       case 'Marketing':
-      case 'Pokemon Only':
+      case 'Pokemon':
         // returns a boolean value
         // if category of that document is equal to the current filter we clicked on, return true.
         return document.projectCategory === currentFilter
