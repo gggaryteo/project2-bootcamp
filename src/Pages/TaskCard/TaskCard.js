@@ -5,7 +5,6 @@ import TaskDetails from "./TaskDetails";
 import { Grid } from "@mui/material";
 import { Card } from "@mui/material";
 import CardComment from "./CardSection/CardComment";
-import CardHeader from "./CardSection/CardHeader";
 
 export default function TaskCard() {
   // Get the ID from the URL. That is defined when we set up the routes in App.js
@@ -29,6 +28,7 @@ export default function TaskCard() {
       alignItems="center"
       justify="center"
       style={{ minHeight: "100vh" }}
+      flexGrow="1"
     >
       <Grid item xs={12}>
         <Grid container justifyContent="center" spacing={2}>

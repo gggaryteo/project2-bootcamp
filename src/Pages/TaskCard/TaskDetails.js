@@ -4,8 +4,6 @@ import { useFirestore } from "../../hooks/useFirestore";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 
-import CardHeader from "./CardSection/CardHeader";
-
 export default function TaskDetails({ taskData, id }) {
   const { deleteDocument } = useFirestore("projects");
   const { user } = useAuthContext();
@@ -20,14 +18,12 @@ export default function TaskDetails({ taskData, id }) {
       <div className="project-taskData">
         <h2 className="title">{taskData.projectName}</h2>
         <p className="created-by">
-          {" "}
           Project Created By: {taskData.createdBy.displayName}
         </p>
         <p className="date">
-          {" "}
           Project Due Date: {taskData.dueDate
             .toDate()
-            .toLocaleDateString()}{" "}
+            .toLocaleDateString()}
         </p>
         <p className="details">{taskData.projectDetails}</p>
         <h4>Project Assigned to: </h4>

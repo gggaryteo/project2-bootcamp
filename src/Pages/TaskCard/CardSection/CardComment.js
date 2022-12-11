@@ -9,12 +9,14 @@ import {
   onSnapshot,
   getDoc,
 } from "firebase/firestore";
+import UserAvatar from "../../../Components/UserAvatar";
 
 export default function CardComment(id) {
   const [comment, setComment] = useState("");
   const [pastcomments, setPastComments] = useState([]);
   const projectid = id.projectid;
   const username = auth.currentUser.displayName;
+  const userPhoto = auth.currentUser.photoURL
 
   // Fetch project comments upon mounting
   useEffect(() => {
@@ -45,6 +47,7 @@ export default function CardComment(id) {
       message: comment,
       user: username,
       date: new Date().toDateString(),
+      photoURL: userPhoto,
       id: Math.random(),
     };
 
@@ -69,21 +72,28 @@ export default function CardComment(id) {
   };
 
   return (
-    <div>
-      <div>
-        <h4>Past comments</h4>
-        <div>
-          {pastcomments === []
-            ? console.log("Empty")
-            : pastcomments.map((msg) => (
-                <div key={msg.id}>
+    <>
+      <ul>
+        <h4 className="past-comments">Past comments</h4>
+        {pastcomments === []
+          ? console.log("Empty")
+          : pastcomments.map((msg) => (
+              <li className="project-comments" key={msg.id}>
+                <div className="comment-author">
+                  <UserAvatar src={msg.photoURL} />
                   <p>{msg.user}</p>
+                </div>
+
+                <div className="comment-content">
                   <p>{msg.message}</p>
+                </div>
+
+                <div className="comment-date">
                   <p>{msg.date}</p>
                 </div>
-              ))}
-        </div>
-      </div>
+              </li>
+            ))}
+      </ul>
 
       <div className="input-container">
         <h4>Comment</h4>
@@ -95,6 +105,6 @@ export default function CardComment(id) {
           Send
         </button>
       </div>
-    </div>
+    </>
   );
 }
