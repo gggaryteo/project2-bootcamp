@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CardComment.css";
-
 import { db, auth } from "../../../firebase";
+
 import {
   doc,
   updateDoc,
@@ -9,6 +9,7 @@ import {
   onSnapshot,
   getDoc,
 } from "firebase/firestore";
+
 import UserAvatar from "../../../Components/UserAvatar";
 
 export default function CardComment(id) {
@@ -48,9 +49,9 @@ export default function CardComment(id) {
     const commentData = {
       message: comment,
       user: username,
-      date: new Date().toDateString(),
       photoURL: userPhoto,
       id: Math.random(),
+      date: new Date().toDateString()
     };
 
     const docref = doc(db, "projects", projectid);
@@ -90,7 +91,9 @@ export default function CardComment(id) {
                 </div>
 
                 <div className="comment-date">
-                  <p>{msg.date}</p>
+                  <p>
+                    {msg.date}
+                  </p>
                 </div>
               </li>
             ))}
@@ -103,9 +106,7 @@ export default function CardComment(id) {
           value={comment}
           required
         ></textarea>
-        <button className="button">
-          Send
-        </button>
+        <button className="button">Send</button>
       </form>
     </>
   );

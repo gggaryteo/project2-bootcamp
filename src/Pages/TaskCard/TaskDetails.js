@@ -10,6 +10,7 @@ export default function TaskDetails({ taskData, id }) {
   const navigate = useNavigate();
 
   const handleDelete = (e) => {
+    e.preventDefault();
     deleteDocument(taskData.id);
     navigate("/");
   };
