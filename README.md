@@ -1,6 +1,6 @@
 # Live Version of the PokeProject: 
 
-projecttwo-3163d.web.app
+https://projecttwo-3163d.web.app
 
 # Getting Started with Create React App
 
