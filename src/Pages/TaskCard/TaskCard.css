@@ -11,6 +11,7 @@
 
 .project-taskData .title {
   text-align: center;
+  margin-top: 10px;
 }
 
 .project-taskData .created-by {
@@ -54,4 +55,16 @@
 .project-comments textarea {
   min-height: 40px;
   font-size: 1.5em;
+}
+
+.project-taskData .image {
+  width: 20px;
+  height: 20px;
+}
+
+.project-taskData .image-button {
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin-right: 10px;
 }
